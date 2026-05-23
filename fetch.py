@@ -4,7 +4,7 @@ from googleapiclient.discovery import build
 from youtube_transcript_api import YouTubeTranscriptApi
 
 # ============ 設定區 ============
-API_KEY = os.environ.get("AIzaSyCXWS5JkmNr7i_Vy1OUSWlwbIY4RxwmKMg")
+API_KEY = os.environ.get("YOUTUBE_API_KEY")
 CHANNEL_ID = "UC0lbAQVpenvfA2QqzsRtL_g"  # 目標頻道
 MAX_VIDEOS = 5  # 每次抓幾部影片
 OUTPUT_FILE = "data/videos.json"
