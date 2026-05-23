@@ -1,0 +1,33 @@
+name: Fetch YouTube Data
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # 每天台灣時間早上10點執行
+  workflow_dispatch:      # 也可以手動觸發
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install google-api-python-client youtube-transcript-api openai
+
+      - name: Run fetch script
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: python fetch.py
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/
+          git commit -m "Update video data" || echo "No changes"
+          git push
