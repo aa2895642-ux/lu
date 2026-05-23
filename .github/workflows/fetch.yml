@@ -17,7 +17,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install google-api-python-client youtube-transcript-api openai
+        run: pip install google-api-python-client youtube-transcript-api google-generativeai
 
       - name: Run fetch script
         env:
