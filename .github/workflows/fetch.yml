@@ -19,10 +19,11 @@ jobs:
       - name: Install dependencies
         run: pip install google-api-python-client google-generativeai yt-dlp
 
-      - name: Run fetch script
-        env:
-          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-        run: python fetch.py
+     - name: Run fetch script
+  env:
+    YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+    GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+  run: python fetch.py
 
       - name: Commit results
         run: |
