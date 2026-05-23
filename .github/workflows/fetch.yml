@@ -2,28 +2,28 @@ name: Fetch YouTube Data
 
 on:
   schedule:
-    - cron: '0 2 * * *'  # 每天台灣時間早上10點執行
-  workflow_dispatch:      # 也可以手動觸發
+    - cron: '0 2 * * *'
+  workflow_dispatch:
 
 jobs:
   fetch:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Install dependencies
         run: pip install google-api-python-client google-generativeai yt-dlp
 
-     - name: Run fetch script
-  env:
-    YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-    GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-  run: python fetch.py
+      - name: Run fetch script
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python fetch.py
 
       - name: Commit results
         run: |
